@@ -1,0 +1,53 @@
+{
+  "name": "ai-notes-app",
+  "version": "1.0.0",
+  "description": "AI-Powered Notes Management System using MERN Stack with Retrieval-Augmented Generation (RAG)",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "start": "node backend/server.js",
+    "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "build": "cd frontend && npm install && npm run build && cd ../backend && npm install --production && cp -r ../frontend/build ./public",
+    "build:prod": "npm run build && cd backend && npm prune --production",
+    "test": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "lint": "eslint .",
+    "setup": "node scripts/setup.js",
+    "docker:build": "docker build -t ai-notes-app .",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "clean": "rm -rf node_modules backend/node_modules frontend/node_modules",
+    "clean:logs": "rm -rf backend/logs/*"
+  },
+  "keywords": [
+    "notes",
+    "ai",
+    "rag",
+    "mern",
+    "mongodb",
+    "express",
+    "react",
+    "nodejs",
+    "retrieval-augmented-generation",
+    "embeddings",
+    "semantic-search"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
