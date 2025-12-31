@@ -49,9 +49,19 @@ app.use(helmet({
 // CORS Configuration
 const corsOptions = {
   origin: function (origin, callback) {
+    // In production, allow same-origin requests (no origin header) and configured origins
     const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000').split(',');
-    // Allow requests with no origin (mobile apps, curl, etc.)
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    
+    // Allow requests with no origin (same-origin, mobile apps, curl, Postman, etc.)
+    if (!origin) {
+      callback(null, true);
+    } 
+    // Allow if origin matches allowed list or is the same Render domain
+    else if (
+      allowedOrigins.indexOf(origin) !== -1 ||
+      origin.includes('onrender.com') ||
+      origin.includes('localhost')
+    ) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
